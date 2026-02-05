@@ -1,12 +1,20 @@
 package com.example.alasli
 
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.alasli.components.AddOrderForm
 import com.example.alasli.components.OrdersGrid
 import data.entities.OrderEntity
 
 @Composable
 fun ActiveOrdersScreen() {
+
+    var showAddForm by remember { mutableStateOf(false) }
 
     fun fakeOrders(): List<OrderEntity> =
         List(10) {
@@ -24,8 +32,36 @@ fun ActiveOrdersScreen() {
             )
         }
 
-    OrdersGrid(
-        orders = fakeOrders()
+    Column(modifier = Modifier.fillMaxSize()) {
 
-    )
+        // ─── Header with button ───
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Active Orders",
+                style = MaterialTheme.typography.headlineMedium
+            )
+
+            Button(onClick = { showAddForm = !showAddForm }) {
+                Icon(Icons.Default.Add, contentDescription = "Add Order")
+                Spacer(Modifier.width(8.dp))
+                Text(if (showAddForm) "Back to Orders" else "Add Order")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // ─── Main content ───
+        if (showAddForm) {
+            AddOrderForm(
+                onSave = { /* handle save */ showAddForm = false }
+            )
+        } else {
+            OrdersGrid(orders = fakeOrders())
+        }
+    }
 }
