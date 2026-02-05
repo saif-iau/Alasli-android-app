@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.example.alasli.ui.theme.HistoryScreen
 
 @Composable
 fun HomeScreenWithNav() {
@@ -41,10 +42,10 @@ fun HomeScreenWithNav() {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Text(
-                    text = "Welcome to Alasli",
-                    style = MaterialTheme.typography.bodyLarge
-                )
+                when (selectedItem) {
+                    "Active Orders" -> ActiveOrdersScreen()
+                    "History" -> HistoryScreen()
+                }
             }
         }
     }
@@ -76,13 +77,11 @@ fun SideNav(
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-            NavItem(Icons.Default.Home, "Home", selectedItem, onItemSelected)
-            NavItem(Icons.Default.List, "Table", selectedItem, onItemSelected)
-            NavItem(Icons.Default.Add, "Create", selectedItem, onItemSelected)
+            NavItem(Icons.Default.DateRange, "Active Orders", selectedItem, onItemSelected)
+            NavItem(Icons.Default.Refresh, "History", selectedItem, onItemSelected)
 
-            Spacer(modifier = Modifier.weight(1f))
 
-            NavItem(Icons.Default.Settings, "Settings", selectedItem, onItemSelected)
+
         }
     }
 }

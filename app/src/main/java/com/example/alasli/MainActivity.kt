@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import com.example.alasli.ui.theme.AlasliTheme
 
@@ -15,8 +16,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AlasliTheme {
+                var showSplash by remember { mutableStateOf(true) }
+
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    HomeScreenWithNav()
+                    if (showSplash) {
+                        SplashScreen(onTimeout = { showSplash = false })
+                    } else {
+                        HomeScreenWithNav()
+                    }
                 }
             }
         }
