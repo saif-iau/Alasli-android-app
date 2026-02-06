@@ -1,3 +1,5 @@
+package com.example.alasli.data.enums
+
 enum class OrderStatus {
     Placed,   // 0
     Ready,    // 1

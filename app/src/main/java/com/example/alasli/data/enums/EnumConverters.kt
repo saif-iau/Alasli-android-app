@@ -1,3 +1,5 @@
+package com.example.alasli.data.enums
+
 import androidx.room.TypeConverter
 
 

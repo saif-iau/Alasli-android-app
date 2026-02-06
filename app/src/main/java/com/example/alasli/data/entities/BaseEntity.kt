@@ -1,4 +1,5 @@
-// BaseEntity.kt
+package com.example.alasli.data.entities
+
 import androidx.room.PrimaryKey
 import java.util.UUID
 

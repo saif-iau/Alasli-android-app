@@ -1,14 +1,11 @@
-package data.entities
+package com.example.alasli.data.entities
 
-import BaseEntity
-import PaymentSplit
-import PaymentMethod
-import OrderStatus
-
-
+import com.example.alasli.data.enums.EnumConverters
+import com.example.alasli.data.enums.OrderStatus
+import com.example.alasli.data.enums.PaymentMethod
+import com.example.alasli.data.enums.PaymentSplit
 import androidx.room.Entity
 import androidx.room.TypeConverters
-
 
 
 @Entity(tableName = "orders")
