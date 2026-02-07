@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.alasli.utils.formatDate
 import com.example.alasli.data.entities.OrderEntity
 
 @Composable
@@ -125,13 +124,13 @@ private fun OrderHeaderCard(order: OrderEntity) {
             ) {
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = "Order #${order.id.take(8)}",
+                        text = "Order #${order.id}",
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Text(
-                        text = "Invoice: #${order.invoiceId}",
+                        text = "Invoice: #${order.invoiceNumber}",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
                     )
@@ -195,7 +194,7 @@ private fun StatusCard(
                 onClick = {},
                 label = {
                     Text(
-                        order.orderStatus.name,
+                        order.status.name,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
@@ -316,17 +315,17 @@ private fun OrderInfoCard(order: OrderEntity) {
 
             HorizontalDivider()
 
-            DetailRow(
-                label = "Customer ID",
-                value = order.customerId,
-                icon = Icons.Default.Person
-            )
+//            DetailRow(
+//                label = "Customer ID",
+//                value = order.customerId,
+//                icon = Icons.Default.Person
+//            )
 
-            DetailRow(
-                label = "Measurement ID",
-                value = order.measurementId,
-                icon = Icons.Default.AddCircle
-            )
+//            DetailRow(
+//                label = "Measurement ID",
+//                value = order.measurementId,
+//                icon = Icons.Default.AddCircle
+//            )
         }
     }
 }
@@ -360,17 +359,17 @@ private fun DatesCard(order: OrderEntity) {
 
             HorizontalDivider()
 
-            DetailRow(
-                label = "Order Date",
-                value = formatDate(order.orderDate),
-                icon = Icons.Default.DateRange
-            )
-
-            DetailRow(
-                label = "Pickup Date",
-                value = formatDate(order.pickupDate),
-                icon = Icons.Default.DateRange
-            )
+//            DetailRow(
+//                label = "Order Date",
+//                value = formatDate(order.placeDate),
+//                icon = Icons.Default.DateRange
+//            )
+//
+//            DetailRow(
+//                label = "Pickup Date",
+//                value = formatDate(order.pickupDate),
+//                icon = Icons.Default.DateRange
+//            )
         }
     }
 }

@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.alasli.utils.formatDate
 import com.example.alasli.data.entities.OrderEntity
 
 @Composable
@@ -38,7 +37,7 @@ fun OrderCard(
         Column(modifier = Modifier.padding(20.dp)) {
             // Header
             Text(
-                text = "Order #${order.id.take(6)}",
+                text = "Order #${order.id}",
                 style = MaterialTheme.typography.titleLarge
             )
 
@@ -47,7 +46,7 @@ fun OrderCard(
             // Status row
             AssistChip(
                 onClick = {},
-                label = { Text(order.orderStatus.name) },
+                label = { Text(order.status.name) },
                 shape = RoundedCornerShape(50),
             )
 
@@ -63,11 +62,11 @@ fun OrderCard(
             Spacer(modifier = Modifier.height(16.dp))
 
             // Footer
-            Text(
-                text = "Pickup • ${formatDate(order.pickupDate)}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+//            Text(
+//                text = "Pickup • ${formatDate(order.pickupDate)}",
+//                style = MaterialTheme.typography.bodySmall,
+//                color = MaterialTheme.colorScheme.onSurfaceVariant
+//            )
         }
     }
 }

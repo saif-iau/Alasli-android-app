@@ -29,8 +29,8 @@ fun OrdersGrid(
             orders
         } else {
             orders.filter { order ->
-                order.id.toString().contains(searchQuery, ignoreCase = true) ||
-                        order.customerId?.contains(searchQuery, ignoreCase = true) == true
+                order.id.toString().contains(searchQuery, ignoreCase = true)
+//                        || order.customerId?.contains(searchQuery, ignoreCase = true) == true
             }
         }
     }

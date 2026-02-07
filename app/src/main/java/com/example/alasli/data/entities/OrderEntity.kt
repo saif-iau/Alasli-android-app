@@ -5,11 +5,12 @@ import androidx.room.PrimaryKey
 import com.example.alasli.data.enums.OrderStatus
 import com.example.alasli.data.enums.PaymentMethod
 import com.example.alasli.data.enums.PaymentSplit
+import java.util.Date
 
 
 @Entity(tableName = "orders")
 data class OrderEntity(
-    @PrimaryKey val id: String,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val clientName: String,
     val phoneNumber: String,
     val invoiceNumber: Int,
@@ -18,5 +19,6 @@ data class OrderEntity(
     val paymentMethod: PaymentMethod,
     val paymentSplit: PaymentSplit,
     val status: OrderStatus,
-    val orderDate: String
+    val placeDate: Date,
+    val pickupDate: Date? = null
 )
