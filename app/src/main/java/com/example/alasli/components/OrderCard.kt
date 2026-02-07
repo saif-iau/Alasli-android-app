@@ -18,24 +18,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.alasli.utils.formatDate
 import data.entities.OrderEntity
+
 @Composable
 fun OrderCard(
     order: OrderEntity,
     modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null
+    onClick: ((OrderEntity) -> Unit)? = null  // Changed to pass the order
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .then(
-                if (onClick != null) Modifier.clickable { onClick() }
+                if (onClick != null) Modifier.clickable { onClick(order) }  // Pass order here
                 else Modifier
             ),
         shape = RoundedCornerShape(18.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-
             // Header
             Text(
                 text = "Order #${order.id.take(6)}",
@@ -44,7 +44,7 @@ fun OrderCard(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Status row (aligned + calm)
+            // Status row
             AssistChip(
                 onClick = {},
                 label = { Text(order.orderStatus.name) },
