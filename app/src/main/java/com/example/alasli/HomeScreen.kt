@@ -13,11 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.example.alasli.ui.theme.HistoryScreen
 
 @Composable
 fun HomeScreenWithNav() {
-    var selectedItem by remember { mutableStateOf("Home") }
+    var selectedItem by remember { mutableStateOf("Active Orders") }
 
     Row(modifier = Modifier.fillMaxSize()) {
         // Side Navigation
