@@ -24,7 +24,6 @@ fun AddOrderForm(
 ) {
     var customerName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
     var invoiceNumber by remember { mutableStateOf("") }
     var selectedPaymentMethod by remember { mutableStateOf("Cash") }
     var selectedPaymentType by remember { mutableStateOf("Full") }
@@ -32,7 +31,6 @@ fun AddOrderForm(
     // Validation states
     var customerNameError by remember { mutableStateOf<String?>(null) }
     var phoneNumberError by remember { mutableStateOf<String?>(null) }
-    var emailError by remember { mutableStateOf<String?>(null) }
     var invoiceNumberError by remember { mutableStateOf<String?>(null) }
     var showValidationErrors by remember { mutableStateOf(false) }
 
@@ -57,14 +55,7 @@ fun AddOrderForm(
         }
     }
 
-    fun validateEmail(emailText: String): String? {
-        if (emailText.isBlank()) return null // Email is optional
-        return when {
-            !emailText.matches(Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) ->
-                "Invalid email format"
-            else -> null
-        }
-    }
+
 
     fun validateInvoiceNumber(invoice: String): String? {
         return when {
@@ -78,12 +69,10 @@ fun AddOrderForm(
     fun validateForm(): Boolean {
         customerNameError = validateCustomerName(customerName)
         phoneNumberError = validatePhoneNumber(phoneNumber)
-        emailError = validateEmail(email)
         invoiceNumberError = validateInvoiceNumber(invoiceNumber)
 
         return customerNameError == null &&
                 phoneNumberError == null &&
-                emailError == null &&
                 invoiceNumberError == null
     }
 
@@ -157,21 +146,6 @@ fun AddOrderForm(
                         modifier = Modifier.weight(1f)
                     )
 
-                    ValidatedTextField(
-                        value = email,
-                        onValueChange = {
-                            email = it
-                            if (showValidationErrors) {
-                                emailError = validateEmail(it)
-                            }
-                        },
-                        label = "Email (Optional)",
-                        leadingIcon = Icons.Default.Email,
-                        errorMessage = if (showValidationErrors) emailError else null,
-                        isRequired = false,
-                        keyboardType = KeyboardType.Email,
-                        modifier = Modifier.weight(1f)
-                    )
                 }
             }
 
