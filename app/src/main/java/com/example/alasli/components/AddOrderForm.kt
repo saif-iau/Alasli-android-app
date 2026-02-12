@@ -16,10 +16,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.graphics.Color
+import com.example.alasli.data.entities.OrderEntity
 
 @Composable
 fun AddOrderForm(
-    onSave: () -> Unit,
+    onSave: (OrderEntity) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var customerName by remember { mutableStateOf("") }
@@ -205,7 +206,27 @@ fun AddOrderForm(
                     onClick = {
                         showValidationErrors = true
                         if (validateForm()) {
-                            onSave()
+                            val order = OrderEntity(
+                                id = 0, // Will be auto-assigned
+                                clientName = customerName,
+                                phoneNumber = phoneNumber,
+                                invoiceNumber = invoiceNumber.toIntOrNull() ?: 0,
+                                qty = 1, // Add a field for this if you need it
+                                total = 0.0, // Add a field for this if you need it
+                                paymentMethod = if (selectedPaymentMethod == "Cash")
+                                    com.example.alasli.data.enums.PaymentMethod.Cash
+                                else
+                                    com.example.alasli.data.enums.PaymentMethod.Card,
+                                paymentSplit = if (selectedPaymentType == "Full")
+                                    com.example.alasli.data.enums.PaymentSplit.Full
+                                else
+                                    com.example.alasli.data.enums.PaymentSplit.Partial,
+                                status = com.example.alasli.data.enums.OrderStatus.Placed,
+                                placeDate = java.util.Date(),
+                                pickupDate = null
+                            )
+
+                            onSave(order) // Pass the created order
                         }
                     },
                     modifier = Modifier.weight(1f)

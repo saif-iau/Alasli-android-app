@@ -1,6 +1,11 @@
 package com.example.alasli.utils
 
-fun formatDate(timestamp: Long): String {
-    val sdf = java.text.SimpleDateFormat("dd MMM yyyy", java.util.Locale.getDefault())
-    return sdf.format(java.util.Date(timestamp))
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+private fun formatDate(date: Date?): String {
+    if (date == null) return "Not Set"
+    val formatter = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+    return formatter.format(date)
 }
